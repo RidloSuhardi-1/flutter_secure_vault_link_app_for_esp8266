@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "382822226171",
+    "firebase_url": "https://iot-keamanan-barang-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "iot-keamanan-barang",
+    "storage_bucket": "iot-keamanan-barang.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:382822226171:android:77eeba7a531df840ac385e",
+        "android_client_info": {
+          "package_name": "com.example.iot_keamanan_barang_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "382822226171-q80j8utdtmevpmbq1luoanhgao30lt9r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSLBFbS1xg3o5CbvS8eaUEiFJjJ_oxJVE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "382822226171-q80j8utdtmevpmbq1luoanhgao30lt9r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "382822226171-o6ofr4hs4qeu1oeqj02j7e4tq6lmg1ko.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.iotKeamananBarangApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:382822226171:android:469f2b73eae162b6ac385e",
+        "android_client_info": {
+          "package_name": "com.iot.keamananbarang"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "382822226171-q80j8utdtmevpmbq1luoanhgao30lt9r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSLBFbS1xg3o5CbvS8eaUEiFJjJ_oxJVE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "382822226171-q80j8utdtmevpmbq1luoanhgao30lt9r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "382822226171-o6ofr4hs4qeu1oeqj02j7e4tq6lmg1ko.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.iotKeamananBarangApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

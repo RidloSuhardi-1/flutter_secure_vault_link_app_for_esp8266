@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>382822226171-o6ofr4hs4qeu1oeqj02j7e4tq6lmg1ko.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.382822226171-o6ofr4hs4qeu1oeqj02j7e4tq6lmg1ko</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCArow1a71LUS_8t8XPYsHqAML9vwL4Yxw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>382822226171</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.iotKeamananBarangApp</string>
+	<key>PROJECT_ID</key>
+	<string>iot-keamanan-barang</string>
+	<key>STORAGE_BUCKET</key>
+	<string>iot-keamanan-barang.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:382822226171:ios:93925229854774b6ac385e</string>
+	<key>DATABASE_URL</key>
+	<string>https://iot-keamanan-barang-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+</dict>
+</plist>

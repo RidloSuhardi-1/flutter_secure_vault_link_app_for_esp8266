@@ -16,8 +16,8 @@ class RiwayatHariIni extends StatefulWidget {
 
 class _RiwayatHariIniState extends State<RiwayatHariIni>
     with AutomaticKeepAliveClientMixin {
-  final _scrollController = ScrollController();
-  Stream<History>? _stream;
+  Stream<History?>? _stream;
+  ScrollController? _scrollController;
 
   String currentDay = "-";
   String currentDate = "-";
@@ -26,6 +26,9 @@ class _RiwayatHariIniState extends State<RiwayatHariIni>
   @override
   void initState() {
     super.initState();
+
+    _scrollController = ScrollController();
+
     getCurrentDateTime().then((value) {
       final datetimeSplit = value.split(' ');
       final dateSplit = datetimeSplit[0].split('-');
@@ -42,16 +45,15 @@ class _RiwayatHariIniState extends State<RiwayatHariIni>
         currentDate = "$day $month $year";
         formattedDate = datetimeSplit[0];
       });
+      _stream = HistoryRepo().getHistoryByDate(formattedDate);
     });
 
     // stream data
-
-    _stream = HistoryRepo().getHistoryByDate(formattedDate);
   }
 
   @override
   void dispose() {
-    _scrollController.dispose();
+    _scrollController?.dispose();
     super.dispose();
   }
 
@@ -59,14 +61,20 @@ class _RiwayatHariIniState extends State<RiwayatHariIni>
   Widget build(BuildContext context) {
     super.build(context);
 
-    return StreamBuilder<History>(
+    return StreamBuilder<History?>(
       stream: _stream,
       builder: (context, snapshot) {
         String? date = "-";
         String? firstTime = "--:--";
         String? lastTime = "--:--";
 
-        List<Message>? timeline = [];
+        Widget? widgetBuilder = const Center(
+          child: SizedBox(
+            width: 46.0,
+            height: 46.0,
+            child: CircularProgressIndicator(color: kPrimaryColor),
+          ),
+        );
 
         if (snapshot.hasData) {
           final data = snapshot.data;
@@ -77,16 +85,47 @@ class _RiwayatHariIniState extends State<RiwayatHariIni>
                 DateTime.parse("${data.date} ${data.timeline!.first.time}"));
             lastTime = formatTime(
                 DateTime.parse("${data.date} ${data.timeline!.last.time}"));
-            timeline = data.timeline;
-          }
 
-          if (_scrollController.hasClients) {
-            _scrollController.animateTo(
-              _scrollController.position.maxScrollExtent,
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeOut,
+            widgetBuilder = SingleChildScrollView(
+              controller: _scrollController,
+              child: TimelineList(
+                date: date,
+                timelines: data.timeline,
+              ),
             );
+
+            if (_scrollController!.hasClients) {
+              _scrollController!.animateTo(
+                _scrollController!.position.maxScrollExtent,
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeOut,
+              );
+            }
           }
+        } else {
+          widgetBuilder = const Center(
+            child: Text(
+              "Belum ada data di tanggal ini",
+              style: TextStyle(
+                  color: kTextColor,
+                  fontSize: 12.0,
+                  fontWeight: FontWeight.w400),
+            ),
+          );
+        }
+
+        if (snapshot.hasError) {
+          debugPrint("Gagal mendapatkan data: ${snapshot.error}");
+
+          widgetBuilder = const Center(
+            child: Text(
+              "Gagal mendapatkan data",
+              style: TextStyle(
+                  color: kTextColor,
+                  fontSize: 12.0,
+                  fontWeight: FontWeight.w400),
+            ),
+          );
         }
 
         return Column(
@@ -96,27 +135,7 @@ class _RiwayatHariIniState extends State<RiwayatHariIni>
               time: "$firstTime - $lastTime",
             ),
             const SizedBox(height: 14.0),
-            timeline!.isNotEmpty
-                ? Expanded(
-                    child: SingleChildScrollView(
-                      controller: _scrollController,
-                      child: TimelineList(
-                        date: date,
-                        timelines: timeline,
-                      ),
-                    ),
-                  )
-                : const Expanded(
-                    child: Center(
-                      child: Text(
-                        "Belum ada data di tanggal ini.",
-                        style: TextStyle(
-                            color: kTextColor,
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                  ),
+            Expanded(child: widgetBuilder),
           ],
         );
       },

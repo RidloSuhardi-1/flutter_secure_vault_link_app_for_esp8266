@@ -45,7 +45,7 @@ class _HomeLastHistoryState extends State<HomeLastHistory> {
         String? dayMonth = "-- --";
 
         if (snapshot.hasData) {
-          final lastDate = snapshot.data!.last;
+          final lastDate = snapshot.data!.first;
           final lastTimeline = lastDate.timeline!.last;
 
           switch (lastTimeline.status) {
@@ -75,6 +75,12 @@ class _HomeLastHistoryState extends State<HomeLastHistory> {
 
           lastTime = formatTime(
               DateTime.parse("${lastDate.date} ${lastTimeline.time}"));
+        }
+
+        if (snapshot.hasError) {
+          debugPrint("Gagal mendapatkan data: ${snapshot.error}");
+
+          lastStatus = "Gagal mendapatkan data";
         }
 
         return MyContainer(

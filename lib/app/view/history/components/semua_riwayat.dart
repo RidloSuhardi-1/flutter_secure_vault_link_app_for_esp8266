@@ -16,18 +16,19 @@ class SemuaRiwayat extends StatefulWidget {
 
 class _SemuaRiwayatState extends State<SemuaRiwayat>
     with AutomaticKeepAliveClientMixin {
-  final _scrollController = ScrollController();
   Stream<List<History>?>? _stream;
+  ScrollController? _scrollController;
 
   @override
   void initState() {
     super.initState();
+    _scrollController = ScrollController();
     _stream = HistoryRepo().getAllHistoryQuery();
   }
 
   @override
   void dispose() {
-    _scrollController.dispose();
+    _scrollController?.dispose();
     super.dispose();
   }
 
@@ -38,31 +39,27 @@ class _SemuaRiwayatState extends State<SemuaRiwayat>
     return StreamBuilder<List<History>?>(
       stream: _stream,
       builder: (context, snapshot) {
-        String day = "-";
-        String dayNumber = "-";
-        String date = "- - -";
-        String timeRange = "--:-- - --:--";
+        String? date = "- - -";
+        String? timeRange = "--:-- - --:--";
+        String? dayNumber = "-";
+        String? day = "-";
 
-        List<History>? historyList = [];
+        Widget? widgetBuilder = const Center(
+          child: SizedBox(
+            width: 46.0,
+            height: 46.0,
+            child: CircularProgressIndicator(color: kPrimaryColor),
+          ),
+        );
 
         if (snapshot.hasData) {
-          historyList = snapshot.data;
-        }
+          final historyList = snapshot.data;
 
-        if (historyList!.isNotEmpty) {
-          if (_scrollController.hasClients) {
-            _scrollController.animateTo(
-              _scrollController.position.maxScrollExtent,
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeOut,
-            );
-          }
-
-          return ListView.builder(
+          widgetBuilder = ListView.builder(
             controller: _scrollController,
-            itemCount: historyList.length,
+            itemCount: historyList!.length,
             itemBuilder: (context, index) {
-              final data = historyList![index];
+              final data = historyList[index];
 
               // dapatkan tanggal dan hari (yyyy-mm-dd)
               final dateSplit = data.date!.split('-');
@@ -92,8 +89,8 @@ class _SemuaRiwayatState extends State<SemuaRiwayat>
               return Column(
                 children: [
                   DateTimeContainer(
-                    date: date,
-                    time: timeRange,
+                    date: "$date",
+                    time: "$timeRange",
                   ),
                   const SizedBox(height: 14.0),
                   data.timeline!.isNotEmpty
@@ -101,10 +98,10 @@ class _SemuaRiwayatState extends State<SemuaRiwayat>
                           date: data.date,
                           timelines: data.timeline,
                         )
-                      : const Expanded(
+                      : const Flexible(
                           child: Center(
                             child: Text(
-                              "Belum ada data di tanggal ini.",
+                              "Belum ada data",
                               style: TextStyle(
                                   color: kTextColor,
                                   fontSize: 12.0,
@@ -116,15 +113,41 @@ class _SemuaRiwayatState extends State<SemuaRiwayat>
               );
             },
           );
+
+          if (_scrollController!.hasClients) {
+            _scrollController!.animateTo(
+              _scrollController!.position.minScrollExtent,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeOut,
+            );
+          }
+        } else {
+          widgetBuilder = const Center(
+            child: Text(
+              "Riwayat tidak tersedia",
+              style: TextStyle(
+                  color: kTextColor,
+                  fontSize: 12.0,
+                  fontWeight: FontWeight.w400),
+            ),
+          );
         }
 
-        return const Center(
-          child: Text(
-            "Belum ada data.",
-            style: TextStyle(
-                color: kTextColor, fontSize: 12.0, fontWeight: FontWeight.w500),
-          ),
-        );
+        if (snapshot.hasError) {
+          debugPrint("Gagal mendapatkan data: ${snapshot.error}");
+
+          widgetBuilder = const Center(
+            child: Text(
+              "Gagal mendapatkan data",
+              style: TextStyle(
+                  color: kTextColor,
+                  fontSize: 12.0,
+                  fontWeight: FontWeight.w400),
+            ),
+          );
+        }
+
+        return widgetBuilder;
       },
     );
   }

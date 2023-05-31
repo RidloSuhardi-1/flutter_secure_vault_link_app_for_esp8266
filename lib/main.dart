@@ -10,13 +10,10 @@ import 'routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
   SetupRepo().getSetup();
-
   runApp(const MyApp());
 }
 

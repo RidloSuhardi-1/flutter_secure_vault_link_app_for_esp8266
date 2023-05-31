@@ -54,6 +54,11 @@ class _HomeLedStatusState extends State<HomeLedStatus> {
           tanggalWaktu = "$day $month $year ${formatTime(data.datetime)}";
         }
 
+        if (snapshot.hasError) {
+          debugPrint("Gagal mendapatkan data: ${snapshot.error}");
+          tanggalWaktu = "Gagal mendapatkan data";
+        }
+
         return MyContainer(
           padding: const EdgeInsets.all(16.0),
           child: Row(

@@ -15,7 +15,7 @@ class HomeRealtimeDetection extends StatefulWidget {
 }
 
 class _HomeRealtimeDetectionState extends State<HomeRealtimeDetection> {
-  Stream<RealtimeDistance>? _stream;
+  Stream<RealtimeDistance?>? _stream;
 
   @override
   void initState() {
@@ -31,7 +31,7 @@ class _HomeRealtimeDetectionState extends State<HomeRealtimeDetection> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<RealtimeDistance>(
+    return StreamBuilder<RealtimeDistance?>(
       stream: _stream,
       builder: (context, snapshot) {
         String? cm = "0";

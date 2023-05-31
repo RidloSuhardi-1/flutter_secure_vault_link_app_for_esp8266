@@ -1,10 +1,11 @@
 import 'dart:async';
 import '../../res/strings/global_key.dart';
 
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 import '../../app/model/history.dart';
+import '../../utils/date_formatter.dart';
 
 class HistoryRepo {
   final _ref = FirebaseDatabase.instance.ref().child('system_notification');
@@ -32,13 +33,11 @@ class HistoryRepo {
 
           for (var entry in sortedList) {
             final timelineValue = entry.value as Map<dynamic, dynamic>;
-
             final m = Message.fromJson({
               'time': entry.key,
               'message': timelineValue['message'],
               'status': timelineValue['status'],
             });
-
             timeline.add(m);
           }
 
@@ -102,12 +101,28 @@ class HistoryRepo {
 
   void deleteAllHistory() {
     _ref.remove().then((_) {
+      createReference();
+
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
           content: Text("Semua riwayat dibersihkan"),
           duration: Duration(seconds: 2),
         ),
       );
+    });
+  }
+
+  void createReference() async {
+    final datetime = await getCurrentDateTime();
+    final datetimeSplit = datetime.split(' ');
+
+    await _ref.set({
+      datetimeSplit[0]: {
+        datetimeSplit[1]: {
+          "message": "Database ditambahkan",
+          "status": "initial",
+        }
+      },
     });
   }
 }

@@ -1,5 +1,8 @@
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../app/view/widgets/custom_messagedialog.dart';
 import '../../utils/date_formatter.dart';
 
 class SetupRepo {
@@ -41,6 +44,31 @@ class SetupRepo {
           },
         });
       }
+    });
+  }
+
+  void getUpdateDetail(BuildContext context) {
+    SharedPreferences.getInstance().then((prefs) {
+      bool isFreshInstall = prefs.getBool('fresh_install') ?? true;
+
+      if (isFreshInstall) {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return const CustomMessageDialog(
+              title: "Informasi Update",
+              text: """
+- Perbaikan bug riwayat hari ini
+- Perbaikan bug fitur hapus
+- Menambahkan pembuatan db baru ketika db masih kosong
+- Perbaikan kecil
+""",
+            );
+          },
+        );
+      }
+
+      prefs.setBool('fresh_install', false).then((_) => null);
     });
   }
 }

@@ -34,6 +34,7 @@ class SetupRepo {
             "inch": 0.0,
           },
           "led_status": {"date": datetime, "status": false},
+          "servo_status": {"date": datetime, "status": false},
           "system_notification": {
             datetimeSplit[0]: {
               datetimeSplit[1]: {

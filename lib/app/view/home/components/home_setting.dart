@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../../data/repository/configuration_repo.dart';
 import '../../../../data/repository/setup_repo.dart';
 import '../../../../res/colors/color.dart';
-import '../../../../res/strings/global_key.dart';
 import '../../../model/config.dart';
 import '../../change_config/change_config_screen.dart';
 import '../../widgets/my_button.dart';

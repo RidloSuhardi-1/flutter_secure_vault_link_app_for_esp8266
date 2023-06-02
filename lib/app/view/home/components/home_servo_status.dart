@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 
-import '../../../../data/repository/led_repo.dart';
+import '../../../../data/repository/servo_repo.dart';
 import '../../../../res/colors/color.dart';
 import '../../../../utils/date_formatter.dart';
-import '../../../model/led.dart';
+import '../../../model/servo.dart';
 import '../../widgets/my_container.dart';
 
-class HomeLedStatus extends StatefulWidget {
-  const HomeLedStatus({
+class HomeServoStatus extends StatefulWidget {
+  const HomeServoStatus({
     super.key,
   });
 
   @override
-  State<HomeLedStatus> createState() => _HomeLedStatusState();
+  State<HomeServoStatus> createState() => _HomeServoStatusState();
 }
 
-class _HomeLedStatusState extends State<HomeLedStatus> {
-  Stream<Led>? _stream;
+class _HomeServoStatusState extends State<HomeServoStatus> {
+  Stream<Servo>? _stream;
 
   @override
   void initState() {
     super.initState();
-    _stream = LedRepo().getStatusQuery();
+    _stream = ServoRepo().getStatusQuery();
   }
 
   @override
@@ -32,7 +32,7 @@ class _HomeLedStatusState extends State<HomeLedStatus> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<Led>(
+    return StreamBuilder<Servo>(
       stream: _stream,
       builder: (context, snapshot) {
         bool? status = false;
@@ -64,13 +64,13 @@ class _HomeLedStatusState extends State<HomeLedStatus> {
             children: [
               SizedBox(
                 width: 40.0,
-                child: Image.asset("assets/images/lamp.png"),
+                child: Image.asset("assets/images/icon.png"),
               ),
               const SizedBox(width: 12.0),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text("Status LED",
+                  const Text("Status Servo",
                       style: TextStyle(
                         color: kTitleColor,
                         fontSize: 12.0,
@@ -86,7 +86,7 @@ class _HomeLedStatusState extends State<HomeLedStatus> {
                 ],
               ),
               const Spacer(),
-              Text("Barang ${status! ? 'diturunkan' : 'belum ada'}",
+              Text("Pintu ${status! ? 'terbuka' : 'tertutup'}",
                   style: const TextStyle(
                     color: kTextColor,
                     fontSize: 12.0,

@@ -5,6 +5,7 @@ import 'components/home_header.dart';
 import 'components/home_last_history.dart';
 import 'components/home_led_status.dart';
 import 'components/home_realtime_detection.dart';
+import 'components/home_servo_status.dart';
 import 'components/home_setting.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -36,6 +37,8 @@ class HomeScreen extends StatelessWidget {
                   HomeHeader(),
                   SizedBox(height: 22.0),
                   HomeLedStatus(),
+                  SizedBox(height: 20.0),
+                  HomeServoStatus(),
                   SizedBox(height: 20.0),
                   HomeRealtimeDetection(),
                   SizedBox(height: 20.0),

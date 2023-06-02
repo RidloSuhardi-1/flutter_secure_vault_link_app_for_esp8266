@@ -17,18 +17,18 @@ class SemuaRiwayat extends StatefulWidget {
 class _SemuaRiwayatState extends State<SemuaRiwayat>
     with AutomaticKeepAliveClientMixin {
   Stream<List<History>?>? _stream;
-  ScrollController? _scrollController;
+  // ScrollController? _scrollController;
 
   @override
   void initState() {
     super.initState();
-    _scrollController = ScrollController();
+    // _scrollController = ScrollController();
     _stream = HistoryRepo().getAllHistoryQuery();
   }
 
   @override
   void dispose() {
-    _scrollController?.dispose();
+    // _scrollController?.dispose();
     super.dispose();
   }
 
@@ -56,7 +56,7 @@ class _SemuaRiwayatState extends State<SemuaRiwayat>
           final historyList = snapshot.data;
 
           widgetBuilder = ListView.builder(
-            controller: _scrollController,
+            // controller: _scrollController,
             itemCount: historyList!.length,
             itemBuilder: (context, index) {
               final data = historyList[index];
@@ -114,13 +114,13 @@ class _SemuaRiwayatState extends State<SemuaRiwayat>
             },
           );
 
-          if (_scrollController!.hasClients) {
-            _scrollController!.animateTo(
-              _scrollController!.position.minScrollExtent,
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeOut,
-            );
-          }
+          // if (_scrollController!.hasClients) {
+          //   _scrollController!.animateTo(
+          //     _scrollController!.position.maxScrollExtent,
+          //     duration: const Duration(milliseconds: 300),
+          //     curve: Curves.easeOut,
+          //   );
+          // }
         } else {
           widgetBuilder = const Center(
             child: Text(

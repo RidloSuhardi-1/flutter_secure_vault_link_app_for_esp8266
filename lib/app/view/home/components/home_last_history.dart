@@ -51,7 +51,7 @@ class _HomeLastHistoryState extends State<HomeLastHistory> {
           switch (lastTimeline.status) {
             case "object-in-range":
               imgSrc = "assets/images/object-in-range.png";
-              lastStatus = "Objek Diluar Jangkauan";
+              lastStatus = "Objek terdeteksi";
               break;
             case "object-detected":
               imgSrc = "assets/images/object-detected.png";

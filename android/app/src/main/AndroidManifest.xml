@@ -8,6 +8,11 @@
         android:label="SecureVault Link"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3762281965442313~7072322884"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

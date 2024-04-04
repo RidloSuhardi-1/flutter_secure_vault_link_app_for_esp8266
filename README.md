@@ -1,16 +1,8 @@
-# iot_keamanan_barang_app
+# SecureVault Link-  Aplikasi Pengatur Perangkat Keamanan Dalam Pengiriman Barang Berbasis Internet Of Things
 
-A new Flutter project.
+Aplikasi Android untuk mengatur konfigurasi perangkat IoT (Internet of Things) untuk keamanan barang berbasis ESP8266.<br><br>
+Link github untuk perangkat dapat dilihat [disini](https://github.com/RidloSuhardi-1/esp8266_keamanan_barang "SecureVault - Security Sensors In The Delivery Of Goods Based On The Internet Of Things").
 
-## Getting Started
+## Tangkapan Layar
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="./screenshot/1 - Beranda.jpg" alt="Beranda" width=250 /> <img src="./screenshot/2 - Pengaturan Perangkat.jpg" alt="Pengaturan Perangkat" width=250 /> <img src="./screenshot/3 - Riwayat Deteksi Perangkat.jpg" alt="Riwayat Deteksi" width=250 />
